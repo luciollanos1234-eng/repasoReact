@@ -40,11 +40,11 @@ const ProductoDetalle = () => {
         ← Volver a productos
       </Link>
       <section className="grid grid-cols-1 gap-10 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:grid-cols-2 md:p-10">
-        <div className="flex min-h-[400px] items-center justify-center rounded-xl bg-gray-50 p-6">
+        <div className="flex min-h-100 items-center justify-center rounded-xl bg-gray-50 p-6">
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="h-full max-h-[500px] w-full object-contain"
+            className="h-full max-h-125 w-full object-contain"
           />
         </div>
         <div className="flex flex-col items-start">
