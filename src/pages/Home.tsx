@@ -3,7 +3,7 @@ import TableroProducto from '../components/TableroProducto'
 
 const Home = () => {
   return (
-    <section className='mx-auto w-full max-w-7x1 px-4 py-8'>
+    <section className='mx-auto w-full max-w-7xl px-4 py-8'>
       <div>
         <h1 className='text-3xl'>Nuestros Productos</h1>
         <p className='text-xl'>Descubrí algunos de nuestros productos más populares.</p>
