@@ -73,7 +73,9 @@ const Navbar = () => {
               `rounded px-3 py-2 hover:bg-amber-300 dark:text-gray-100 dark:hover:bg-gray-700 ${isActive ? "text-amber-900 dark:text-amber-300" : "text-amber-800"}`
             }
           >
-            {authContext?.user ? "Perfil" : "Iniciar sesión"}
+            {authContext?.user
+              ? `Hola, ${authContext.user.name}`
+              : "Iniciar sesión"}
           </NavLink>
           {authContext?.user && (
             <button

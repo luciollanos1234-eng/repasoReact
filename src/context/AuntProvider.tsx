@@ -1,5 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { AuthContext, type User } from "./AuthContex"; 
+import Swal from "sweetalert2";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -25,12 +26,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = (userData: User) => {
     setUser(userData);
     localStorage.setItem("auth_user", JSON.stringify(userData));
-  };
+       Swal.fire({
+  title: "Bienvenido",
+  text: "Has iniciado sesion correctamente",
+  icon: "success",
+  background: "#1e293b",
+  color:"#f8fafc" 
+  })
+};
 
   // Función para cerrar sesión
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_user");
+    Swal.fire({
+      title: "sesion cerrada",
+      text: "cerraste tu sesion correctamente",
+      icon: "info",
+       background: "#1e293b",
+  color:"#f8fafc"
+    })
   };
 
   const isAuthenticated = !!user;

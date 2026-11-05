@@ -24,20 +24,14 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const submitLogin = (data: LoginFormValues) => {
-    Swal.fire({
-  title: "Bienvenido",
-  text: "Has iniciado sesion correctamente",
-  icon: "success",
-  background: "#1e293b",
-  color:"#f8fafc"
-});
+    
     console.log(data);
     setIsSubmitting(true);
     navigate("/");
     setIsSubmitting(false);
     authContext?.login({
       id: 1,
-      name: "Julian",
+      name: "?",
       email: data.email,
     });
   };
