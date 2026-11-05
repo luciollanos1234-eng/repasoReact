@@ -26,7 +26,7 @@ export const Login = () => {
   const submitLogin = (data: LoginFormValues) => {
     Swal.fire({
   title: "Bienvenido",
-  text: "Has iniciado sesion",
+  text: "Has iniciado sesion correctamente",
   icon: "success",
   background: "#1e293b",
   color:"#f8fafc"

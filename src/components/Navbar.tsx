@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { CiSun } from "react-icons/ci";
 import { IoMoonOutline } from "react-icons/io5";
 import { FiMenu, FiX } from "react-icons/fi";
+import { AuthContext } from "../context/AuthContex";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem("theme") === "dark",
   );
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
@@ -21,7 +23,10 @@ const Navbar = () => {
         aria-label="Navegación principal"
         className="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 py-3 sm:px-6 lg:px-8"
       >
-        <NavLink to="/" className="text-2xl font-semibold text-amber-800 dark:text-amber-300">
+        <NavLink
+          to="/"
+          className="text-2xl font-semibold text-amber-800 dark:text-amber-300"
+        >
           MiniMarket
         </NavLink>
 
@@ -34,7 +39,6 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-
         </button>
 
         <div
@@ -44,7 +48,9 @@ const Navbar = () => {
           <button
             type="button"
             className="flex items-center gap-2 rounded px-3 py-2 text-left hover:bg-amber-300 dark:text-gray-100 dark:hover:bg-gray-700"
-            aria-label={isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
+            aria-label={
+              isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro"
+            }
             aria-pressed={isDark}
             onClick={() => setIsDark((current) => !current)}
           >
@@ -67,8 +73,20 @@ const Navbar = () => {
               `rounded px-3 py-2 hover:bg-amber-300 dark:text-gray-100 dark:hover:bg-gray-700 ${isActive ? "text-amber-900 dark:text-amber-300" : "text-amber-800"}`
             }
           >
-            Iniciar sesión
+            {authContext?.user ? "Perfil" : "Iniciar sesión"}
           </NavLink>
+          {authContext?.user && (
+            <button
+              type="button"
+              className="w-max text-slate-700 hover:text-blue-600 dark:text-slate-200"
+              onClick={() => {
+                authContext.logout();
+                setIsMenuOpen(false);
+              }}
+            >
+              Cerrar sesión
+            </button>
+          )}
         </div>
       </nav>
     </header>
