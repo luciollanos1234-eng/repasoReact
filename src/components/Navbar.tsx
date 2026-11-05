@@ -74,17 +74,17 @@ const Navbar = () => {
             }
           >
             {authContext?.user
-              ? `Hola, ${authContext.user.name}`
+              ? `Hola ${authContext.user.name}`
               : "Iniciar sesión"}
           </NavLink>
           {authContext?.user && (
             <button
               type="button"
-              className="w-max text-slate-700 hover:text-blue-600 dark:text-slate-200"
               onClick={() => {
                 authContext.logout();
                 setIsMenuOpen(false);
               }}
+              className="rounded px-3 py-2 text-amber-800 hover:bg-amber-300 dark:text-gray-100 dark:hover:bg-gray-700"
             >
               Cerrar sesión
             </button>

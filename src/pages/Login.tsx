@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContex";
 import Swal from "sweetalert2";
+import { usuarios } from "../data/users";
+
 
 interface LoginFormValues {
   email: string;
@@ -10,11 +12,10 @@ interface LoginFormValues {
 }
 
 export const Login = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     defaultValues: { email: "", password: "" },
   });
@@ -24,16 +25,24 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const submitLogin = (data: LoginFormValues) => {
-    
-    console.log(data);
-    setIsSubmitting(true);
-    navigate("/");
-    setIsSubmitting(false);
-    authContext?.login({
-      id: 1,
-      name: "?",
+
+    const foundUser = usuarios.find((user) => user.email === data.email);
+    if (foundUser) {
+      authContext?.login({
+      id: foundUser?.id,
+      name: foundUser?.name,
       email: data.email,
-    });
+      });
+      navigate("/");
+    } else{
+      Swal.fire({
+        title: "error",
+        text: "usuario no encontrado, no es posible iniciar sesion",
+        icon: "error",
+         background: "#1e293b",
+  color:"#f8fafc" 
+      })
+    }
   };
 
   return (
