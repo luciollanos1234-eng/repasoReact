@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContex";
+import Swal from "sweetalert2";
 
 interface LoginFormValues {
   email: string;
@@ -23,6 +24,13 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const submitLogin = (data: LoginFormValues) => {
+    Swal.fire({
+  title: "Bienvenido",
+  text: "Has iniciado sesion",
+  icon: "success",
+  background: "#1e293b",
+  color:"#f8fafc"
+});
     console.log(data);
     setIsSubmitting(true);
     navigate("/");
